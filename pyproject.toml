@@ -1,0 +1,146 @@
+[tool.poetry]
+name = "genxdata"
+version = "0.1.0"
+description = "Synthetic Data Generation Tool - A comprehensive toolkit for generating synthetic data with various strategies and output formats"
+authors = ["Tosif khan <khantosif94@gmail.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+package-mode = false
+keywords = ["synthetic-data", "data-generation", "testing", "privacy"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+cramjam = "2.10.0"
+et-xmlfile = "2.0.0"
+fastparquet = "2024.11.0"
+fsspec = "2025.5.1"
+names = "0.3.0"
+numpy = "2.3.1"
+packaging = "25.0"
+pandas = "2.3.0"
+python-dateutil = "2.9.0.post0"
+pytz = "2025.2"
+pyyaml = "6.0.2"
+rstr = "3.2.2"
+six = "1.17.0"
+tzdata = "2025.2"
+python-qpid-proton = "^0.40.0"
+matplotlib = "^3.10.3"
+seaborn = "^0.13.2"
+scipy = "^1.16.0"
+pytest = "^8.4.1"
+openpyxl = "^3.1.5"
+pyarrow = "^21.0.0"
+lxml = "^6.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest-cov = "^6.2.1"
+black = "^25.1.0"
+mypy = "^1.17.0"
+pre-commit = "^4.2.0"
+ruff = "^0.12.4"
+httpx = "^0.28.1"
+
+
+[tool.poetry.group.api.dependencies]
+fastapi = "^0.116.1"
+uvicorn = "^0.35.0"
+
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.6.1"
+mkdocs-material = "^9.6.19"
+mkdocstrings = {extras = ["python"], version = "^0.30.0"}
+mkdocs-gen-files = "^0.5.0"
+mkdocs-literate-nav = "^0.6.2"
+mkdocs-section-index = "^0.3.10"
+mike = "^2.1.3"
+mkdocs-minify-plugin = "^0.8.0"
+mkdocs-git-revision-date-localized-plugin = "^1.4.7"
+interrogate = "^1.7.0"
+
+[tool.poetry.scripts]
+genxdata = "cli.main_cli:main"
+
+[tool.ruff]
+# Python version
+target-version = "py312"
+line-length = 88
+
+# Exclude certain directories
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "venv",
+    ".mypy_cache",
+    ".pytest_cache",
+    "build",
+    "dist",
+    "frontend",
+]
+
+[tool.ruff.lint]
+# Enable import sorting (replaces isort)
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (import sorting)
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+
+# Allow certain violations in tools directory
+per-file-ignores = { "tools/*.py" = ["E402"] }  # Allow module imports not at top of file in tools
+
+# Ignore some common issues
+ignore = [
+    "F841",  # Local variable assigned but never used (can be useful for debugging)
+    "E501"
+]
+
+[tool.ruff.format]
+# Use Black-compatible formatting
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+no_strict_optional = true
+explicit_package_bases = true
+check_untyped_defs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+disallow_untyped_decorators = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+exclude = [
+    "frontend/",
+    "tools/",
+    "tests/",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = "."

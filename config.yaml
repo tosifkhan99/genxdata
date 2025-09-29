@@ -1,0 +1,42 @@
+metadata:
+  name: generated_config
+  description: Generated configuration from CLI
+  version: 1.0.0
+column_name:
+- name
+- age
+- email
+num_of_rows: 500
+shuffle: true
+configs:
+- column_names:
+  - name
+  strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: full
+      gender: any
+      case: title
+- column_names:
+  - age
+  strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 18
+      end: 65
+      step: 1
+      precision: 0
+      unique: false
+- column_names:
+  - email
+  strategy:
+    name: PATTERN_STRATEGY
+    params:
+      regex: '[a-z]{5,10}\.[a-z]{3,8}@[a-z]{3,8}\.(com|org|net)'
+file_writer:
+  type: JSON_WRITER
+  params:
+    output_path: ./output/generated_data.json
+    orient: records
+    date_format: iso
+    indent: 2

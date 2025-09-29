@@ -1,0 +1,82 @@
+site_name: GenXData
+site_description: Comprehensive documentation for the GenXData synthetic data platform
+site_url: https://example.com/GenXData
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.instant
+    - content.code.copy
+    - content.tabs.link
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.tabbed
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js
+  - js/mermaid-init.js
+
+plugins:
+  - search
+  - gen-files:
+      scripts:
+        - docs/_scripts/gen_reference.py
+  - literate-nav
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_root_heading: true
+            filters:
+              - "!^_"
+            heading_level: 2
+  - minify
+  - git-revision-date-localized
+
+nav:
+  - Home: index.md
+  - Features:
+      - Overview: features/overview.md
+  - Guides:
+      - Running Modes: guides/modes.md
+      - Masks & Filtering: guides/masks-and-filtering.md
+  - Tutorials:
+      - Quickstart (Batch): tutorials/quickstart.md
+      - Quickstart (Streaming): tutorials/quickstart-streaming.md
+      - Quickstart (Frontend): tutorials/quickstart-frontend.md
+  - Writers:
+      - Overview: writers/overview.md
+  - Strategies:
+      - Overview: strategies/overview.md
+      - Details & Examples: strategies/details.md
+  - How-to:
+      - Configs:
+          - Write Batch Configs: how-to/configs/write-batch-configs.md
+          - Write Streaming Configs: how-to/configs/write-stream-configs.md
+      - Messaging:
+          - Kafka: how-to/messaging/kafka.md
+          - AMQP: how-to/messaging/amqp.md
+      - Deployment:
+          - Docker: how-to/deployment/docker.md
+      - Extending:
+          - New Strategy: how-to/extending/new-strategy.md
+          - New Writer: how-to/extending/new-writer.md
+          - New Processor: how-to/extending/new-processor.md
+  - Reference:
+      - CLI: reference/cli.md
+      - Config Schema: reference/config-schema.md
+      - Strategies: reference/strategies/index.md
+      - Writers: reference/writers/index.md
+      - Processors: reference/processors/index.md
+  - Explanations:
+      - Architecture Overview: explanations/architecture-overview.md
+      - Architecture (Mermaid): explanations/architecture-mermaid.md
+      - Class Diagram (LLD): explanations/class-diagram.md
