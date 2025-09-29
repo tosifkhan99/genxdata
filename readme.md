@@ -538,7 +538,7 @@ Key Files:
 
 ### ⚙️ **Flexible Configuration**
 - 📝 **YAML/JSON Support**: Human-readable configuration files
-- 🎯 **Generator Mappings**: 175+ pre-built generators across 9 domains
+- 🎯 **Generator Mappings**: 200+ pre-built generators across 9 domains
 - 🔧 **Custom Parameters**: Fine-tune generation with strategy-specific parameters
 - 📋 **Metadata Support**: Project information, versioning, and documentation
 
@@ -554,7 +554,7 @@ Key Files:
 - 🔧 **Extensible Architecture**: Easy to add support for new queue systems
 
 ### 🖥️ **User-Friendly Interfaces**
-- 💻 **Command Line Interface**: Comprehensive CLI with 175+ generators and domain-specific commands
+- 💻 **Command Line Interface**: Comprehensive CLI with 200+ generators and domain-specific commands
 - ⚛️ **React Frontend**: Modern web interface with interactive configuration builder and real-time preview
 - 🔌 **REST API**: FastAPI-powered backend with 12+ endpoints for programmatic access and integration
 - 🐳 **Docker Support**: Containerized deployment with single-command setup and production-ready configuration
@@ -598,23 +598,26 @@ Or a Date of Birth can be a generator that is a wrapper around the [Date Generat
 
 ## 📋 About the tool
 
-GenXData is a comprehensive synthetic data generation framework designed for developers, data scientists, and QA engineers who need realistic test data for their applications. With 13+ generation strategies, 175+ pre-built generators, and support for multiple interfaces (CLI, REST API, Web UI), GenXData provides everything you need to generate high-quality synthetic data at scale.
+GenXData is a comprehensive synthetic data generation framework designed for developers, data scientists, and QA engineers who need realistic test data for their applications. With 16+ generation strategies, 200+ pre-built generators, and support for multiple interfaces (CLI, REST API, Web UI), GenXData provides everything you need to generate high-quality synthetic data at scale.
 
 ## 🎲 Available Strategies
 
 1. **RANDOM_NUMBER_RANGE_STRATEGY** - Generate random numbers within specified ranges
 2. **DISTRIBUTED_NUMBER_RANGE_STRATEGY** - Generate numbers with custom probability distributions
-3. **DATE_GENERATOR_STRATEGY** - Generate dates within specified ranges and formats
-4. **DISTRIBUTED_DATE_RANGE_STRATEGY** - Generate dates with weighted distributions
-5. **PATTERN_STRATEGY** - Generate data matching regular expression patterns
-6. **SERIES_STRATEGY** - Generate sequential or arithmetic series
-7. **DISTRIBUTED_CHOICE_STRATEGY** - Generate categorical data with custom probabilities
-8. **TIME_RANGE_STRATEGY** - Generate time values within specified ranges
-9. **DISTRIBUTED_TIME_RANGE_STRATEGY** - Generate time values with weighted distributions
-10. **REPLACEMENT_STRATEGY** - Replace or transform existing values
-11. **CONCAT_STRATEGY** - Concatenate multiple columns or values
-12. **RANDOM_NAME_STRATEGY** - Generate realistic names with gender and type filtering
-13. **DELETE_STRATEGY** - Conditionally delete or nullify values
+3. **RANDOM_DATE_RANGE_STRATEGY** - Generate dates within specified ranges and formats
+4. **DATE_SERIES_STRATEGY** - Generate sequential date series
+5. **DISTRIBUTED_DATE_RANGE_STRATEGY** - Generate dates with weighted distributions
+6. **PATTERN_STRATEGY** - Generate data matching regular expression patterns
+7. **SERIES_STRATEGY** - Generate sequential or arithmetic series
+8. **DISTRIBUTED_CHOICE_STRATEGY** - Generate categorical data with custom probabilities
+9. **TIME_RANGE_STRATEGY** - Generate time values within specified ranges
+10. **DISTRIBUTED_TIME_RANGE_STRATEGY** - Generate time values with weighted distributions
+11. **REPLACEMENT_STRATEGY** - Replace or transform existing values
+12. **CONCAT_STRATEGY** - Concatenate multiple columns or values
+13. **RANDOM_NAME_STRATEGY** - Generate realistic names with gender and type filtering
+14. **DELETE_STRATEGY** - Conditionally delete or nullify values
+15. **MAPPING_STRATEGY** - Map values from source to target using dictionaries or files
+16. **UUID_STRATEGY** - Generate unique identifiers with customizable formats
 
 Each strategy is highly configurable and can be combined to create complex data generation scenarios.
 
@@ -623,11 +626,11 @@ Each strategy is highly configurable and can be combined to create complex data 
 GenXData includes built-in performance monitoring capabilities:
 
 ```bash
-# Enable performance reporting
-python main.py generate config.yaml --perf-report
+# Enable performance reporting in CLI
+poetry run python -m cli.main_cli generate config.yaml --perf-report
 
-# CLI with performance monitoring
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli generate config.yaml --verbose
+# Or in direct run
+python main.py generate config.yaml --perf-report
 ```
 
 Performance reports include:
@@ -668,16 +671,26 @@ column_name:
 num_of_rows: 1000
 
 configs:
-  - names: ["name"]
+  - column_names: ["name"]
     strategy:
       name: "RANDOM_NAME_STRATEGY"
       params: {}
 
-  - names: ["email"]
+  - column_names: ["email"]
     strategy:
       name: "PATTERN_STRATEGY"
       params:
         regex: "[a-z]{5}@example.com"
+
+  - column_names: ["age"]
+    strategy:
+      name: "RANDOM_NUMBER_RANGE_STRATEGY"
+      params:
+        start: 18
+        end: 65
+        step: 1
+        precision: 0
+        unique: false
 
 file_writer:
   type: "CSV_WRITER"
@@ -695,7 +708,7 @@ We welcome contributions! Please see our contributing guidelines and feel free t
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## �� Links
+## 🔗 Links
 
 - **Documentation**: [dev-docs/](dev-docs/)
 - **API Reference**: http://localhost:8000/api/docs (when server is running)
