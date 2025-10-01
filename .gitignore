@@ -3,6 +3,7 @@ __pycache__
 .ipynb_checkpoints
 config.json
 output.csv
+output
 *.csv
 *temp*
 *tmp*
@@ -10,9 +11,6 @@ output.csv
 *Untitled*
 TODO
 node_modules
-examples
-new-outputoutput
 .vscode
 bandit-report.json
 analysis_output
-tests/test_all_stateful_strategies.py
