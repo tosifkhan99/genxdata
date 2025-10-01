@@ -70,6 +70,7 @@ bootstrap_servers: localhost:9092
 topic: genxdata.events
 batch_size: 1000
 chunk_size: 1000
+delay_seconds: 0.5
 ```
 
 Stream config (AMQP, nested form):
@@ -80,6 +81,7 @@ amqp:
   queue: genxdata.events
 batch_size: 1000
 chunk_size: 1000
+delay_seconds: 0.5
 ```
 
 CLI:
@@ -91,6 +93,7 @@ Behavior:
 - Orchestrator detects `--stream` and creates `StreamWriter`.
 - `StreamingConfigProcessor` generates chunks and sends batches via the queue producer.
 - Queue type detection supports nested (`amqp`/`kafka` key) or flat (`type: amqp|kafka`).
+- Optional `delay_seconds` applies an idle sleep between batch sends.
 
 ### Column-Level Options
 

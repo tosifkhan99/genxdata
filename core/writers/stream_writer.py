@@ -5,6 +5,7 @@ Handles writing DataFrames to message queues (AMQP, Kafka, etc.).
 """
 
 from typing import Any
+import time
 
 import pandas as pd
 
@@ -35,6 +36,7 @@ class StreamWriter(BaseWriter):
         self.total_batches_sent = 0
         self.queue_meta: dict[str, Any] = {}
         self.normalized_queue_config: dict[str, Any] | None = None
+        self.delay_seconds: float = 0.0
 
         # Validate configuration and normalize queue settings
         self.validate_config()
@@ -89,12 +91,21 @@ class StreamWriter(BaseWriter):
                 f"Stream writer config missing required fields for {queue_type}: provide either 'url' or 'host' and 'port'"
             )
 
+        # Optional delay between sends (seconds)
+        raw_delay = section.get("delay_seconds")
+        try:
+            if raw_delay is not None:
+                self.delay_seconds = max(0.0, float(raw_delay))
+        except (TypeError, ValueError):
+            raise ValueError("'delay_seconds' must be a number (seconds)")
+
         # Store normalized meta and config
         self.queue_meta = {
             "queue_type": queue_type,
             "host": section.get("host") or section.get("url"),
             "port": section.get("port"),
             "queue": section.get("queue"),
+            "delay_seconds": self.delay_seconds,
         }
         self.normalized_queue_config = {queue_type: section}
 
@@ -167,6 +178,13 @@ class StreamWriter(BaseWriter):
             self.total_batches_sent += 1
 
             self.logger.info(f"Successfully sent {len(df)} rows to message queue")
+
+            # Apply optional idle delay between sends
+            if self.delay_seconds and self.delay_seconds > 0:
+                try:
+                    time.sleep(self.delay_seconds)
+                except Exception:
+                    pass
 
             return {
                 "status": "success",
