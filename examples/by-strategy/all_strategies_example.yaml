@@ -1,0 +1,235 @@
+metadata:
+  name: all_example
+  description: Example of all generators
+  version: 1.0.0
+  author: Tosif Khan
+  github: https://github.com/tosifkhan99
+  email: khantosif94@gmail.com
+  license: Apache-2.0
+column_name:
+- id
+- first_name
+- last_name
+- age
+- salary
+- email
+- department
+- hire_date
+- product_code
+- performance_rating
+- series_date
+- dist_date
+- time_range
+- dist_time
+- original_col
+- replacement_col
+- mapping_col
+- uuid_col
+- delete_col
+num_of_rows: 100
+shuffle: true
+file_writer:
+  type: CSV_WRITER
+  params:
+    output_path: ./output/all_strategies_example.csv
+configs:
+- column_names:
+  - id
+  strategy:
+    name: SERIES_STRATEGY
+    params:
+      start: 1000
+      step: 1
+
+- strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: first
+      gender: any
+      case: title
+  column_names:
+  - first_name
+- strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: last
+      gender: any
+      case: title
+  column_names:
+  - last_name
+- strategy:
+    name: DISTRIBUTED_NUMBER_RANGE_STRATEGY
+    params:
+      ranges:
+      - start: 22
+        end: 30
+        distribution: 30
+      - start: 31
+        end: 40
+        distribution: 40
+      - start: 41
+        end: 50
+        distribution: 20
+      - start: 51
+        end: 65
+        distribution: 10
+  column_names:
+  - age
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 50000
+      end: 150000
+      step: 1000
+      precision: 0
+  column_names:
+  - salary
+- strategy:
+    name: CONCAT_STRATEGY
+    params:
+      lhs_col: first_name
+      rhs_col: last_name
+      separator: .
+      suffix: '@company.com'
+  column_names:
+  - email
+- strategy:
+    name: DISTRIBUTED_CHOICE_STRATEGY
+    params:
+      choices:
+        Engineering: 35
+        Marketing: 20
+        Sales: 25
+        HR: 10
+        Finance: 10
+  column_names:
+  - department
+- strategy:
+    name: DATE_GENERATOR_STRATEGY
+    params:
+      start_date: '2020-01-01'
+      end_date: '2024-12-31'
+      format: '%Y-%m-%d'
+      output_format: '%Y-%m-%d'
+  column_names:
+  - hire_date
+- strategy:
+    name: PATTERN_STRATEGY
+    params:
+      regex: '[A-Z]{2}[0-9]{3}-[A-Z]{2}'
+  column_names:
+  - product_code
+- strategy:
+    name: DISTRIBUTED_CHOICE_STRATEGY
+    params:
+      choices:
+        Excellent: 15
+        Good: 35
+        Average: 35
+        Below Average: 10
+        Poor: 5
+  column_names:
+  - performance_rating
+- strategy:
+    name: DATE_SERIES_STRATEGY
+    params:
+      start_date: '2020-01-01'
+      freq: 'D'
+      format: '%Y-%m-%d'
+  column_names:
+  - series_date
+- strategy:
+    name: DISTRIBUTED_DATE_RANGE_STRATEGY
+    params:
+      ranges:
+      - start_date: '2020-01-01'
+        end_date: '2020-12-31'
+        distribution: 40
+        format: '%Y-%m-%d'
+        output_format: '%Y-%m-%d'
+      - start_date: '2021-01-01'
+        end_date: '2021-12-31'
+        distribution: 30
+        format: '%Y-%m-%d'
+        output_format: '%Y-%m-%d'
+      - start_date: '2022-01-01'
+        end_date: '2022-12-31'
+        distribution: 20
+        format: '%Y-%m-%d'
+        output_format: '%Y-%m-%d'
+      - start_date: '2023-01-01'
+        end_date: '2023-12-31'
+        distribution: 10
+        format: '%Y-%m-%d'
+        output_format: '%Y-%m-%d'
+  column_names:
+  - dist_date
+- strategy:
+    name: TIME_RANGE_STRATEGY
+    params:
+      start_time: '00:00:00'
+      end_time: '23:59:59'
+      format: '%H:%M:%S'
+  column_names:
+  - time_range
+- strategy:
+    name: DISTRIBUTED_TIME_RANGE_STRATEGY
+    params:
+      ranges:
+      - start: '00:00:00'
+        end: '05:59:59'
+        distribution: 10
+        format: '%H:%M:%S'
+      - start: '06:00:00'
+        end: '11:59:59'
+        distribution: 30
+        format: '%H:%M:%S'
+      - start: '12:00:00'
+        end: '17:59:59'
+        distribution: 40
+        format: '%H:%M:%S'
+      - start: '18:00:00'
+        end: '23:59:59'
+        distribution: 20
+        format: '%H:%M:%S'
+  column_names:
+  - dist_time
+- strategy:
+    name: DISTRIBUTED_CHOICE_STRATEGY
+    params:
+      choices:
+        Apple: 40
+        Banana: 30
+        Cherry: 20
+        Date: 10
+  column_names:
+  - original_col
+- strategy:
+    name: REPLACEMENT_STRATEGY
+    params:
+      from_value: Apple
+      to_value: Red Fruit
+  column_names:
+  - original_col
+- strategy:
+    name: MAPPING_STRATEGY
+    params:
+      map_from: original_col
+      mapping:
+        Apple: AAPL
+        Banana: BAN
+        Cherry: CHR
+        Date: DAT
+  column_names:
+  - mapping_col
+- strategy:
+    name: UUID_STRATEGY
+    params:
+      version: 4
+  column_names:
+  - uuid_col
+- strategy:
+    name: DELETE_STRATEGY
+    params: {}
+  column_names:
+  - delete_col

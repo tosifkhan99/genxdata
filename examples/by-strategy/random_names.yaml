@@ -1,0 +1,148 @@
+metadata:
+  name: random_names
+  description: Comprehensive demonstration of advanced random name generation with
+    names package
+  version: 1.0.0
+  author: Tosif Khan
+  github: https://github.com/tosifkhan99
+  email: khantosif94@gmail.com
+  license: Apache-2.0
+column_name:
+- employee_id
+- male_first_name
+- female_first_name
+- surname
+- full_name_title
+- full_name_caps
+- full_name_lowercase
+- business_email
+- personal_email
+- display_name
+- username
+- department
+- role
+num_of_rows: 50
+shuffle: true
+file_writer:
+  type: CSV_WRITER
+  params:
+    output_path: output/random_names.csv
+configs:
+- strategy:
+    name: SERIES_STRATEGY
+    params:
+      start: 1001
+      step: 1
+  column_names:
+  - employee_id
+- strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: first
+      gender: male
+      case: title
+  column_names:
+  - male_first_name
+- strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: first
+      gender: female
+      case: title
+  column_names:
+  - female_first_name
+- strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: last
+      gender: any
+      case: title
+  column_names:
+  - surname
+- strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: full
+      gender: any
+      case: title
+  column_names:
+  - full_name_title
+- strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: full
+      gender: any
+      case: upper
+  column_names:
+  - full_name_caps
+- strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: full
+      gender: any
+      case: lower
+  column_names:
+  - full_name_lowercase
+- strategy:
+    name: CONCAT_STRATEGY
+    params:
+      lhs_col: male_first_name
+      rhs_col: surname
+      separator: .
+      prefix: ''
+      suffix: '@company.com'
+  column_names:
+  - business_email
+- strategy:
+    name: CONCAT_STRATEGY
+    params:
+      lhs_col: female_first_name
+      rhs_col: surname
+      separator: _
+      prefix: ''
+      suffix: '@gmail.com'
+  column_names:
+  - personal_email
+- strategy:
+    name: CONCAT_STRATEGY
+    params:
+      lhs_col: full_name_title
+      rhs_col: surname
+      separator: ' - '
+      prefix: 'Employee: '
+      suffix: ''
+  column_names:
+  - display_name
+- strategy:
+    name: CONCAT_STRATEGY
+    params:
+      lhs_col: male_first_name
+      rhs_col: surname
+      separator: ''
+      prefix: ''
+      suffix: ''
+  column_names:
+  - username
+- strategy:
+    name: DISTRIBUTED_CHOICE_STRATEGY
+    params:
+      choices:
+        Engineering: 25
+        Human Resources: 15
+        Marketing: 20
+        Sales: 20
+        Finance: 10
+        Operations: 10
+  column_names:
+  - department
+- strategy:
+    name: DISTRIBUTED_CHOICE_STRATEGY
+    params:
+      choices:
+        Manager: 20
+        Senior Associate: 30
+        Associate: 35
+        Director: 10
+        VP: 5
+  column_names:
+  - role

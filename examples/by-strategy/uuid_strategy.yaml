@@ -1,0 +1,79 @@
+metadata:
+  name: UUID Strategy Examples
+  description: Examples of deterministic UUID5 generation (unique within run)
+  version: '1.0'
+num_of_rows: 100
+shuffle: false
+column_name:
+- id
+- order_id
+- session_id
+- prefixed_upper_nohyphen
+- alnum_only_upper
+- numbers_only
+- letters_only
+file_writer:
+  type: CSV_WRITER
+  params:
+    output_path: output/uuid_strategy_example.csv
+configs:
+- strategy:
+    name: UUID_STRATEGY
+    params:
+      hyphens: true
+      uppercase: false
+      prefix: ''
+      seed: 42
+  column_names:
+  - id
+- strategy:
+    name: UUID_STRATEGY
+    params:
+      hyphens: false
+      uppercase: true
+      prefix: ''
+      seed: 42
+  column_names:
+  - order_id
+- strategy:
+    name: UUID_STRATEGY
+    params:
+      hyphens: true
+      uppercase: true
+      prefix: ''
+      seed: 99
+  column_names:
+  - session_id
+- strategy:
+    name: UUID_STRATEGY
+    params:
+      hyphens: false
+      uppercase: true
+      prefix: ID_
+      seed: 123
+  column_names:
+  - prefixed_upper_nohyphen
+- strategy:
+    name: UUID_STRATEGY
+    params:
+      hyphens: true
+      uppercase: true
+      alphanumeric_only: true
+      seed: 7
+  column_names:
+  - alnum_only_upper
+- strategy:
+    name: UUID_STRATEGY
+    params:
+      numbers_only: true
+      seed: 5
+  column_names:
+  - numbers_only
+- strategy:
+    name: UUID_STRATEGY
+    params:
+      letters_only: true
+      uppercase: true
+      seed: 6
+  column_names:
+  - letters_only

@@ -1,0 +1,71 @@
+metadata:
+  name: Mapping Strategy
+  description: Comprehensive demonstration of mapping strategy
+  version: 1.0.0
+  author: Tosif Khan
+  github: https://github.com/tosifkhan99
+  email: khantosif94@gmail.com
+  license: Apache-2.0
+column_name:
+- employee_id
+- employee_name
+- department_id
+- department_name
+num_of_rows: 100
+shuffle: false
+file_writer:
+  type: CSV_WRITER
+  params:
+    output_path: output/mapping-output.csv
+configs:
+- strategy:
+    name: SERIES_STRATEGY
+    params:
+      start: 1
+      step: 1
+  column_names:
+  - employee_id
+- strategy:
+    name: SERIES_STRATEGY
+    params:
+      start: 1
+      step: 1
+  column_names:
+  - department_id
+- strategy:
+    name: MAPPING_STRATEGY
+    params:
+      map_from: department_id
+      source_map_from: dept_id
+      source: /Users/tosifhussainkhan/oss/GenXData/output/mapping.csv
+      source_column: dept_name
+  column_names:
+  - department_name
+- strategy:
+    name: DISTRIBUTED_CHOICE_STRATEGY
+    params:
+      choices:
+        Sales: 30
+        Marketing: 40
+        Engineering: 30
+  column_names:
+  - department_name
+- strategy:
+    name: MAPPING_STRATEGY
+    params:
+      map_from: employee_id
+      mapping:
+        1: John
+        2: Jane
+        3: Jim
+  column_names:
+  - department_name
+- strategy:
+    name: MAPPING_STRATEGY
+    params:
+      map_from: department_id
+      source_map_from: dept_id
+      source: /Users/tosifhussainkhan/oss/GenXData/output/mapping.csv
+      source_column: dept_name
+  column_names:
+  - department_name

@@ -1,0 +1,41 @@
+metadata:
+  name: intermediate_test
+  description: Test intermediate columns filtering
+  version: 1.0.0
+column_name:
+- first_tmp
+- last_tmp
+- full_name
+num_of_rows: 100
+shuffle: false
+file_writer:
+  type: CSV_WRITER
+  params:
+    output_path: ./output/intermediate_test.csv
+configs:
+- intermediate: true
+  strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: first
+      gender: any
+      case: title
+  column_names:
+  - first_tmp
+- intermediate: true
+  strategy:
+    name: RANDOM_NAME_STRATEGY
+    params:
+      name_type: last
+      gender: any
+      case: title
+  column_names:
+  - last_tmp
+- strategy:
+    name: CONCAT_STRATEGY
+    params:
+      lhs_col: first_tmp
+      rhs_col: last_tmp
+      separator: ' '
+  column_names:
+  - full_name

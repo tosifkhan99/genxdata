@@ -1,0 +1,60 @@
+metadata:
+  name: CSV Batch Writing Test
+  type: BATCH
+  description: Configuration for testing CSV batch file writing
+  version: '1.0'
+batch:
+  output_dir: batch_output_csv
+  file_prefix: data_batch
+  file_format: csv
+  batch_size: 500
+  file_writer:
+    type: csv
+    params:
+      output_path: ./batch_output_csv/batch_example_{batch_index}.csv
+num_of_rows: 2000
+shuffle: false
+column_name:
+- id
+- name
+- email
+- department
+- salary
+configs:
+- intermediate: false
+  strategy:
+    name: SERIES_STRATEGY
+    params:
+      start: 1
+      step: 1
+  column_names:
+  - id
+- strategy:
+    name: RANDOM_NAME_STRATEGY
+    params: {}
+  column_names:
+  - name
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 1000000
+      end: 9999999
+  column_names:
+  - email
+- strategy:
+    name: DISTRIBUTED_CHOICE_STRATEGY
+    params:
+      choices:
+        Engineering: 40
+        HR: 20
+        Sales: 25
+        Marketing: 15
+  column_names:
+  - department
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 50000
+      end: 120000
+  column_names:
+  - salary

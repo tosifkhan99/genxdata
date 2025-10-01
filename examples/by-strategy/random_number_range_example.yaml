@@ -1,0 +1,153 @@
+metadata:
+  name: Random Number Range Strategy Examples
+  description: Comprehensive examples of RANDOM_NUMBER_RANGE_STRATEGY usage
+  version: '1.0'
+num_of_rows: 100
+shuffle: false
+write_output: true
+column_name:
+- id
+- age
+- salary
+- temperature
+- price
+- score
+- rating
+- quantity
+- discount_percent
+- latitude
+- longitude
+- timestamp_unix
+- product_id
+file_writer:
+  type: CSV_WRITER
+  params:
+    output_path: output/number_range_example.csv
+configs:
+- strategy:
+    name: SERIES_STRATEGY
+    params:
+      start: 1
+      step: 1
+  column_names:
+  - id
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 18
+      end: 65
+      step: 1
+      precision: 0
+      unique: false
+  column_names:
+  - age
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 30000
+      end: 150000
+      step: 1000
+      precision: 0
+      unique: false
+  column_names:
+  - salary
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: -20
+      end: 45
+      step: 0.1
+      precision: 1
+      unique: false
+  column_names:
+  - temperature
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 9.99
+      end: 999.99
+      step: 0.01
+      precision: 2
+      unique: false
+  column_names:
+  - price
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 0
+      end: 100
+      step: 1
+      precision: 0
+      unique: false
+  column_names:
+  - score
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 1
+      end: 5
+      step: 1
+      precision: 0
+      unique: false
+  column_names:
+  - rating
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 1
+      end: 1000
+      step: 1
+      precision: 0
+      unique: false
+  column_names:
+  - quantity
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 0
+      end: 50
+      step: 5
+      precision: 0
+      unique: false
+  column_names:
+  - discount_percent
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: -90
+      end: 90
+      step: 1.0e-06
+      precision: 6
+      unique: false
+  column_names:
+  - latitude
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: -180
+      end: 180
+      step: 1.0e-06
+      precision: 6
+      unique: false
+  column_names:
+  - longitude
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 1704067200
+      end: 1735689599
+      step: 1
+      precision: 0
+      unique: false
+  column_names:
+  - timestamp_unix
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 10000
+      end: 99999
+      step: 1
+      precision: 0
+      unique: true
+  column_names:
+  - product_id

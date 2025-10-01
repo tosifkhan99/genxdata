@@ -1,0 +1,32 @@
+metadata:
+  name: Date Series Strategy Example
+  description: Generates daily and monthly series from a start date
+  version: '1.0'
+num_of_rows: 100
+shuffle: false
+column_name:
+- day
+- month
+file_writer:
+  type: CSV_WRITER
+  params:
+    output_path: output/date_series_example.csv
+configs:
+- strategy:
+    name: DATE_SERIES_STRATEGY
+    params:
+      start_date: '2024-01-01'
+      freq: D
+      format: '%Y-%m-%d'
+      output_format: '%Y-%m-%d'
+  column_names:
+  - day
+- strategy:
+    name: DATE_SERIES_STRATEGY
+    params:
+      start_date: '2024-01-01'
+      freq: MS
+      format: '%Y-%m-%d'
+      output_format: '%Y-%m'
+  column_names:
+  - month

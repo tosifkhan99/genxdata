@@ -1,0 +1,239 @@
+metadata:
+  name: perf_all_strategies
+  description: Performance benchmark covering most strategies with masks
+  version: 1.0.0
+column_name:
+- id
+- uuid
+- first_name
+- last_name
+- full_name
+- age
+- salary
+- bonus
+- department
+- mapped_department
+- hire_date
+- hire_time
+- hire_datetime
+- product_code
+- email
+- rating
+- performance_bucket
+- shift_window
+- seq_num
+- pattern_col
+- delete_flag
+num_of_rows: 1_000_000
+shuffle: true
+file_writer:
+  type: CSV_WRITER
+  params:
+    output_path: ./output/perf_benchmark_data.csv
+configs:
+- strategy:
+    name: SERIES_STRATEGY
+    params:
+      start: 1
+      step: 1
+  column_names:
+  - id
+- strategy:
+    name: UUID_STRATEGY
+    params:
+      version: 5
+      hyphens: true
+      uppercase: false
+  column_names:
+  - uuid
+# - strategy:
+#     name: RANDOM_NAME_STRATEGY
+#     params:
+#       name_type: first
+#       gender: any
+#       case: title
+#   column_names:
+#   - first_name
+# - strategy:
+#     name: RANDOM_NAME_STRATEGY
+#     params:
+#       name_type: last
+#       gender: any
+#       case: title
+#   column_names:
+#   - last_name
+- strategy:
+    name: CONCAT_STRATEGY
+    params:
+      lhs_col: first_name
+      rhs_col: last_name
+      separator: ' '
+  column_names:
+  - full_name
+- strategy:
+    name: DISTRIBUTED_NUMBER_RANGE_STRATEGY
+    params:
+      ranges:
+      - start: 18
+        end: 25
+        distribution: 20
+      - start: 26
+        end: 35
+        distribution: 35
+      - start: 36
+        end: 50
+        distribution: 30
+      - start: 51
+        end: 65
+        distribution: 15
+  column_names:
+  - age
+- strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 40000
+      end: 200000
+      precision: 0
+  column_names:
+  - salary
+- mask: age >= 40
+  strategy:
+    name: RANDOM_NUMBER_RANGE_STRATEGY
+    params:
+      start: 5000
+      end: 25000
+      precision: 0
+  column_names:
+  - bonus
+- strategy:
+    name: DISTRIBUTED_CHOICE_STRATEGY
+    params:
+      choices:
+        Engineering: 35
+        Marketing: 20
+        Sales: 25
+        HR: 10
+        Finance: 10
+  column_names:
+  - department
+- strategy:
+    name: MAPPING_STRATEGY
+    params:
+      map_from: department
+      mapping:
+        Engineering: Tech
+        Marketing: Biz
+        Sales: Biz
+        HR: Ops
+        Finance: Ops
+  column_names:
+  - mapped_department
+- strategy:
+    name: RANDOM_DATE_RANGE_STRATEGY
+    params:
+      start_date: '2018-01-01'
+      end_date: '2024-12-31'
+      format: '%Y-%m-%d'
+      output_format: '%Y-%m-%d'
+  column_names:
+  - hire_date
+- strategy:
+    name: TIME_RANGE_STRATEGY
+    params:
+      start_time: 08:00:00
+      end_time: '18:00:00'
+      format: '%H:%M:%S'
+  column_names:
+  - hire_time
+- mask: age >= 30
+  strategy:
+    name: DATE_SERIES_STRATEGY
+    params:
+      start_date: '2020-01-01'
+      freq: S
+      format: '%Y-%m-%d'
+      output_format: '%Y-%m-%d %H:%M:%S'
+  column_names:
+  - hire_datetime
+- strategy:
+    name: PATTERN_STRATEGY
+    params:
+      regex: '[A-Z]{2}[0-9]{5}-[A-Z]{2}'
+  column_names:
+  - product_code
+- strategy:
+    name: CONCAT_STRATEGY
+    params:
+      lhs_col: first_name
+      rhs_col: last_name
+      separator: .
+      suffix: '@example.com'
+  column_names:
+  - email
+- strategy:
+    name: DISTRIBUTED_CHOICE_STRATEGY
+    params:
+      choices:
+        Excellent: 10
+        Good: 30
+        Average: 40
+        BelowAverage: 15
+        Poor: 5
+  column_names:
+  - rating
+- mask: department == 'Engineering' or department == 'Sales'
+  strategy:
+    name: DISTRIBUTED_DATE_RANGE_STRATEGY
+    params:
+      ranges:
+      - start_date: '2023-01-01'
+        end_date: '2023-06-30'
+        format: '%Y-%m-%d'
+        output_format: '%Y-%m-%d'
+        distribution: 40
+      - start_date: '2023-07-01'
+        end_date: '2023-12-31'
+        format: '%Y-%m-%d'
+        output_format: '%Y-%m-%d'
+        distribution: 60
+  column_names:
+  - performance_bucket
+- strategy:
+    name: DISTRIBUTED_TIME_RANGE_STRATEGY
+    params:
+      ranges:
+      - start: 06:00:00
+        end: '14:00:00'
+        format: '%H:%M:%S'
+        distribution: 40
+      - start: '14:00:00'
+        end: '22:00:00'
+        format: '%H:%M:%S'
+        distribution: 40
+      - start: '22:00:00'
+        end: 06:00:00
+        format: '%H:%M:%S'
+        distribution: 20
+  column_names:
+  - shift_window
+- mask: salary >= 120000
+  strategy:
+    name: SERIES_STRATEGY
+    params:
+      start: 100000
+      step: 3
+  column_names:
+  - seq_num
+- mask: rating in ['Excellent','Good']
+  strategy:
+    name: PATTERN_STRATEGY
+    params:
+      regex: '[A-F]{1}[0-9]{2}[A-F]{1}'
+  column_names:
+  - pattern_col
+- mask: rating in ['Poor'] and age > 50
+  strategy:
+    name: DELETE_STRATEGY
+    params:
+  column_names:
+  - delete_flag
