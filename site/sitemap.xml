@@ -2,230 +2,254 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://example.com/GenXData/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/explanations/architecture-mermaid/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/explanations/architecture-overview/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/explanations/class-diagram/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
+    </url>
+    <url>
+         <loc>https://example.com/GenXData/features/overview/</loc>
+         <lastmod>2025-10-01</lastmod>
+    </url>
+    <url>
+         <loc>https://example.com/GenXData/guides/masks-and-filtering/</loc>
+         <lastmod>2025-10-01</lastmod>
+    </url>
+    <url>
+         <loc>https://example.com/GenXData/guides/modes/</loc>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/how-to/configs/write-batch-configs/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/how-to/configs/write-stream-configs/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/how-to/deployment/docker/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/how-to/extending/new-processor/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/how-to/extending/new-strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/how-to/extending/new-writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/how-to/messaging/amqp/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/how-to/messaging/kafka/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/cli/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/config-schema/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/api/base_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/api/orchestrator/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/api/strategy_config/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/api/strategy_factory/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/api/strategy_mapping/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/processors/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/processors/base_config_processor/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/processors/normal_config_processor/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/processors/streaming_config_processor/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/concat_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/date_series_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/delete_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/distributed_choice_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/distributed_date_range_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/distributed_number_range_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/distributed_time_range_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/mapping_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/pattern_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/random_date_range_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/random_name_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/random_number_range_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/replacement_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/series_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/time_range_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/strategies/uuid_strategy/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/base_file_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/base_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/batch_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/csv_file_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/excel_file_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/feather_file_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/file_writer_factory/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/generic_file_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/html_file_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/json_file_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/parquet_file_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/sqlite_file_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/reference/writers/stream_writer/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
-         <loc>https://example.com/GenXData/tutorials/quickstart-batch/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <loc>https://example.com/GenXData/strategies/details/</loc>
+         <lastmod>2025-10-01</lastmod>
+    </url>
+    <url>
+         <loc>https://example.com/GenXData/strategies/overview/</loc>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/tutorials/quickstart-frontend/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
     </url>
     <url>
          <loc>https://example.com/GenXData/tutorials/quickstart-streaming/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-01</lastmod>
+    </url>
+    <url>
+         <loc>https://example.com/GenXData/tutorials/quickstart/</loc>
+         <lastmod>2025-10-01</lastmod>
+    </url>
+    <url>
+         <loc>https://example.com/GenXData/writers/overview/</loc>
+         <lastmod>2025-10-01</lastmod>
     </url>
 </urlset>
