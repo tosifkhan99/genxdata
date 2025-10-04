@@ -38,17 +38,18 @@ poetry run python main.py --help
 
 #### **📋 Alternative: Pip Installation**
 
-If you prefer using pip, you can install dependencies directly:
+If you prefer using pip:
 
 ```bash
-# Install CLI dependencies
-pip install -r cli-requirements.txt
+# (Recommended) Create and activate a virtual environment
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\\Scripts\\activate
 
-# For API server and web interface
-pip install fastapi uvicorn httpx
+# Install dependencies
+pip install -r requirements.txt
 
-# For development
-pip install -r cli-requirements.txt pytest black ruff
+# Verify CLI is available
+python -m cli.main_cli --help
 ```
 
 ### 🛠️ Running the tool
@@ -62,8 +63,8 @@ pip install -r cli-requirements.txt pytest black ruff
 # Generate data with Poetry
 poetry run python main.py generate path/to/your/config.yaml
 
-# With verbose output and debugging
-poetry run python main.py ./examples/all_example.yaml --debug
+# With verbose logging
+poetry run python main.py -l DEBUG generate examples/by-strategy/random_number_range_example.yaml
 ```
 
 **Using Direct Python:**
@@ -71,8 +72,8 @@ poetry run python main.py ./examples/all_example.yaml --debug
 # Generate data directly
 python main.py generate path/to/your/config.yaml
 
-# With verbose output and debugging
-python main.py ./examples/all_example.yaml --debug
+# With verbose logging
+python main.py -l DEBUG generate examples/by-strategy/random_number_range_example.yaml
 ```
 
 ### 🔧 Development Setup
@@ -111,7 +112,15 @@ poetry shell
 
 **Using Pip:**
 ```bash
-pip install -r cli-requirements.txt
+# (Recommended) Create and activate a virtual environment
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\\Scripts\\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the CLI
+python -m cli.main_cli --help
 ```
 
 #### **Global Options**
@@ -124,16 +133,16 @@ Explore available generators with optional filtering and statistics:
 
 ```bash
 # List all generators (175 total across 9 domains)
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli list-generators
+poetry run python -m cli.main_cli list-generators
 
 # Filter generators by name pattern
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli list-generators --filter NAME
+poetry run python -m cli.main_cli list-generators --filter NAME
 
 # Show comprehensive statistics
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli list-generators --show-stats
+poetry run python -m cli.main_cli list-generators --show-stats
 
 # Combine verbose logging with filtering
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli --verbose list-generators --filter NAME
+poetry run python -m cli.main_cli -l DEBUG list-generators --filter NAME
 ```
 
 ##### **2. Show Generator Details**
@@ -141,10 +150,10 @@ Get detailed information about a specific generator:
 
 ```bash
 # Show details of a specific generator
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli show-generator PERSON_NAME
+poetry run python -m cli.main_cli show-generator PERSON_NAME
 
 # Output includes strategy and parameters
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli show-generator EMAIL_PATTERN
+poetry run python -m cli.main_cli show-generator EMAIL_PATTERN
 ```
 
 ##### **3. Find Generators by Strategy**
@@ -152,10 +161,10 @@ List all generators using a specific strategy:
 
 ```bash
 # Find generators using RANDOM_NAME_STRATEGY
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli by-strategy RANDOM_NAME_STRATEGY
+poetry run python -m cli.main_cli by-strategy RANDOM_NAME_STRATEGY
 
-# Find generators using DATE_GENERATOR_STRATEGY
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli by-strategy DATE_GENERATOR_STRATEGY
+# Find generators using RANDOM_DATE_RANGE_STRATEGY
+poetry run python -m cli.main_cli by-strategy RANDOM_DATE_RANGE_STRATEGY
 ```
 
 ##### **4. Create Configuration Files**
@@ -163,13 +172,13 @@ Generate configuration files from generator mappings:
 
 ```bash
 # Create config with generator mapping
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli create-config \
+poetry run python -m cli.main_cli create-config \
   --mapping "name:FULL_NAME,age:PERSON_AGE,email:EMAIL_PATTERN" \
   --output test_config.json \
   --rows 50
 
 # Create config with custom metadata
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli create-config \
+poetry run python -m cli.main_cli create-config \
   --mapping "product:PRODUCT_NAME,price:PRODUCT_PRICE" \
   --output ecommerce_config.yaml \
   --rows 1000 \
@@ -177,7 +186,7 @@ poetry run python -m cli.main_cli  # or: python -m cli.main_cli create-config \
   --description "Product catalog data"
 
 # Use a mapping file instead of command line
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli create-config \
+poetry run python -m cli.main_cli create-config \
   --mapping-file mapping.json \
   --output config.yaml \
   --rows 500
@@ -188,11 +197,10 @@ Create example configurations for specific domains:
 
 ```bash
 # Generate domain-specific configuration examples
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli generate-domain-configs
+poetry run python -m cli.main_cli create-domain-configs
 
 # Creates configs in ./output/ for:
-# - ecommerce, healthcare, education, geographic
-# - transportation, business, technology, iot_sensors
+# - ecommerce, healthcare, education, transportation, iot_sensors, etc.
 ```
 
 ##### **6. Generate Data**
@@ -200,13 +208,13 @@ Generate data from configurations:
 
 ```bash
 # Generate data from your configuration
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli generate config.json
+poetry run python -m cli.main_cli generate config.json
 
 # Generate from example configurations
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli generate ./examples/person_example.yaml
+poetry run python -m cli.main_cli generate examples/by-strategy/random_number_range_example.yaml
 
-# Generate data from configuration
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli generate config.yaml --stream streaming_config.yaml
+# Generate data with streaming
+poetry run python -m cli.main_cli generate config.yaml --stream examples/stream_configs/amqp_example.yaml
 ```
 
 ##### **7. Show Statistics**
@@ -214,47 +222,40 @@ View generator and strategy statistics:
 
 ```bash
 # Show detailed statistics
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli stats
+poetry run python -m cli.main_cli stats
 
-# Includes:
-# - Total generators count
-# - Strategy distribution
-# - Domain distribution
-# - Available strategies list
+# Includes totals, strategy and domain distribution, and available strategies
 ```
 
 #### **Command Examples & Use Cases**
 
 ```bash
-# Discover what generators are available
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli list-generators
+# Discover available generators
+poetry run python -m cli.main_cli list-generators
 
 # Find name-related generators
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli list-generators --filter NAME
+poetry run python -m cli.main_cli list-generators --filter NAME
 
 # See all generators using a specific strategy
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli by-strategy RANDOM_NAME_STRATEGY
-
-# Filter generators by name pattern
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli list-generators --filter PERSON
+poetry run python -m cli.main_cli by-strategy RANDOM_NAME_STRATEGY
 
 # Create a user profile dataset
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli create-config \
+poetry run python -m cli.main_cli create-config \
   --mapping "name:FULL_NAME,email:EMAIL_PATTERN,age:PERSON_AGE" \
   --output user_profiles.json \
   --rows 1000
 
 # Generate the data
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli generate user_profiles.json
+poetry run python -m cli.main_cli generate user_profiles.json
 
 # Create all domain example configs
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli generate-domain-configs
+poetry run python -m cli.main_cli create-domain-configs
 
 # Generate healthcare data
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli generate ./output/healthcare_config.yaml
+poetry run python -m cli.main_cli generate ./output/healthcare_config.yaml
 
 # Generate ecommerce data
-poetry run python -m cli.main_cli  # or: python -m cli.main_cli generate ./output/ecommerce_config.yaml
+poetry run python -m cli.main_cli generate ./output/ecommerce_config.yaml
 ```
 
 #### **Important Notes**
@@ -275,152 +276,7 @@ poetry run python -m cli.main_cli  # or: python -m cli.main_cli generate ./outpu
   - **Transportation** (19 generators): Vehicle data, logistics
   - **Ecommerce** (18 generators): Product data, pricing, orders
 
-### 🌐 **REST API & Web Interface**
-
-GenXData provides a comprehensive REST API built with FastAPI, offering programmatic access to all data generation capabilities. The API is designed for integration with web applications, microservices, and automated workflows.
-
-#### **🔌 API Server**
-
-**Quick Start:**
-
-**Using Poetry (Recommended):**
-```bash
-# Start the API server with Poetry
-poetry run uvicorn api:app --reload
-
-# Server will be available at:
-# - API: http://localhost:8000
-# - Documentation: http://localhost:8000/api/docs
-# - Alternative docs: http://localhost:8000/api/redoc
-```
-
-**Using Direct Python:**
-```bash
-# Start the API server directly
-uvicorn api:app --reload
-```
-
-**Production Deployment:**
-```bash
-# Production server with Poetry
-poetry run uvicorn api:app --host 0.0.0.0 --port 8000 --workers 4
-
-# Or directly
-uvicorn api:app --host 0.0.0.0 --port 8000 --workers 4
-```
-
-#### **📋 API Endpoints Overview**
-
-##### **Health & Information**
-- `GET /ping` - Simple health check
-- `GET /api/health` - Comprehensive health status with features
-- `GET /api/version` - API version and capabilities
-
-##### **Strategy Management**
-- `GET /get_all_strategies` - List all 13+ available strategies
-- `GET /get_strategy_schemas` - Get detailed strategy parameter schemas
-
-##### **Data Generation**
-- `POST /generate_data` - Generate data and return as JSON
-- `POST /generate_and_download` - Generate data and download as ZIP file
-- `POST /api/streaming/generate` - Real-time streaming data generation
-- `POST /api/batch/generate` - Large-scale batch data processing
-
-##### **Configuration**
-- `POST /api/config/validate` - Validate configuration before generation
-- `GET /api/schemas/config` - Get complete configuration schema
-
-##### **Frontend Serving**
-- `GET /` - Serve React web interface
-- `GET /{filename:path}` - Serve static assets
-
-#### **📄 API Usage Examples**
-
-**Python Client:**
-```python
-import requests
-
-# Generate data
-config = {
-    "metadata": {"name": "User Dataset"},
-    "column_name": ["name", "email", "age"],
-    "num_of_rows": 100,
-    "configs": [
-        {
-            "names": ["name"],
-            "strategy": {"name": "RANDOM_NAME_STRATEGY", "params": {}}
-        },
-        {
-            "names": ["email"],
-            "strategy": {"name": "PATTERN_STRATEGY", "params": {"regex": "[a-z]{5}@example.com"}}
-        },
-        {
-            "names": ["age"],
-            "strategy": {"name": "NUMBER_RANGE_STRATEGY", "params": {"min_value": 18, "max_value": 65}}
-        }
-    ],
-    "file_writer": {"type": "CSV_WRITER", "params": {"output_path": "users.csv"}}
-}
-
-response = requests.post("http://localhost:8000/generate_data", json=config)
-data = response.json()
-```
-
-**JavaScript/Node.js Client:**
-```javascript
-// Generate and download data
-const config = {
-    metadata: { name: "Product Catalog" },
-    column_name: ["product_name", "price", "category"],
-    num_of_rows: 500,
-    configs: [
-        {
-            names: ["product_name"],
-            strategy: { name: "RANDOM_NAME_STRATEGY", params: {} }
-        },
-        {
-            names: ["price"],
-            strategy: { name: "NUMBER_RANGE_STRATEGY", params: { min_value: 10, max_value: 1000 } }
-        }
-    ]
-};
-
-fetch('http://localhost:8000/generate_and_download', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(config)
-})
-.then(response => response.blob())
-.then(blob => {
-    // Handle file download
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'generated_data.zip';
-    a.click();
-});
-```
-
-**cURL Examples:**
-```bash
-# Health check
-curl http://localhost:8000/ping
-
-# Get all strategies
-curl http://localhost:8000/get_all_strategies
-
-# Generate data
-curl -X POST http://localhost:8000/generate_data \
-  -H "Content-Type: application/json" \
-  -d @config.json
-
-# Validate configuration
-curl -X POST http://localhost:8000/api/config/validate \
-  -H "Content-Type: application/json" \
-  -d @config.json
-```
-
-#### **⚛️ React Frontend**
+### ⚛️ **React Frontend**
 
 **Development Setup:**
 ```bash
@@ -438,7 +294,7 @@ npm run dev
 - 📋 **Project Management**: Save and load configurations with metadata
 - 🔧 **Validation**: Real-time configuration validation and error feedback
 
-#### **🐳 Docker Deployment**
+#### **🐳 Docker**
 
 **Quick Start:**
 ```bash
@@ -447,8 +303,6 @@ docker-compose up --build
 
 # Access the application:
 # - Frontend: http://localhost:3000
-# - API: http://localhost:8000
-# - API Docs: http://localhost:8000/api/docs
 ```
 
 **Manual Docker Build:**
@@ -474,19 +328,8 @@ docker run -d \
   genxdata:latest
 ```
 
-#### **🔒 API Security & Performance**
-
-**Security Features:**
-- ✅ **CORS Support**: Configurable cross-origin resource sharing
-- ✅ **Input Validation**: Comprehensive request validation and sanitization
-- ✅ **Error Handling**: Safe error messages without sensitive data exposure
-- ✅ **Rate Limiting**: Built-in protection against abuse (configurable)
-
-**Performance Optimizations:**
-- ⚡ **Async Processing**: FastAPI async support for concurrent requests
-- 💾 **Memory Management**: Efficient data generation with streaming support
-- 📦 **Response Compression**: ZIP compression for large datasets
-- 🔄 **Batch Processing**: Handle large-scale data generation efficiently
+#### **Status**
+Docker support is experimental and targets containerizing the CLI; no REST API is exposed.
 
 
 ## 🏗️ Project Structure
@@ -495,9 +338,8 @@ docker run -d \
 GenXData/
 ├── core/                   # Core data generation engine
 │   ├── orchestrator.py     # Main processing orchestrator
-│   ├── strategies/         # 13 generation strategies
-│   ├── processors/         # Normal, streaming, and batch processors
-│   └── streaming/          # Streaming and batch processing
+│   ├── strategies/         # Generation strategies
+│   ├── processors/         # Normal and streaming/batch processors
 ├── cli/                    # Command-line interface
 ├── utils/                  # Utility functions and helpers
 ├── configs/                # Configuration files and settings
@@ -505,16 +347,14 @@ GenXData/
 ├── exceptions/             # Custom exception hierarchy
 ├── messaging/              # Message queue integration (AMQP, Kafka)
 ├── frontend/               # React web interface
-├── dev-docs/               # Architecture and API documentation
+├── dev-docs/               # Architecture and docs
 ├── examples/               # Example configurations
-└── api.py                  # FastAPI server
+└── main.py                 # CLI entry point
 
 Key Files:
-├── api.py                  # REST API server (FastAPI)
-├── main.py                 # Programmatic entry point
+├── main.py                 # Programmatic/CLI entry point
 ├── pyproject.toml          # Poetry dependency management
-├── docker-compose.yml      # Docker deployment configuration
-└── Dockerfile              # Container build configuration
+└── docker-compose.yml      # Docker compose (experimental)
 ```
 
 ## ✨ Features
@@ -556,9 +396,7 @@ Key Files:
 ### 🖥️ **User-Friendly Interfaces**
 - 💻 **Command Line Interface**: Comprehensive CLI with 200+ generators and domain-specific commands
 - ⚛️ **React Frontend**: Modern web interface with interactive configuration builder and real-time preview
-- 🔌 **REST API**: FastAPI-powered backend with 12+ endpoints for programmatic access and integration
-- 🐳 **Docker Support**: Containerized deployment with single-command setup and production-ready configuration
-- 📚 **API Documentation**: Interactive Swagger/OpenAPI documentation at `/api/docs`
+- 🐳 **Docker**: Experimental containerization for CLI workflows
 - 🔧 **Development Tools**: Hot reload, debugging support, and comprehensive error handling
 
 ### 📈 **Performance & Monitoring**
@@ -574,6 +412,15 @@ Key Files:
 - 📖 **Comprehensive Documentation**: Detailed examples, configuration guides, and API reference
 - 🚨 **Error Handling**: Clear error messages and validation feedback
 - 🔍 **Debugging Tools**: Verbose logging, performance monitoring, and diagnostic endpoints
+
+## ✅ Current Feature Status
+
+- CLI commands (list-generators, show-generator, by-strategy, create-config, create-domain-configs, generate, stats): working
+- Generation modes: standard, streaming, and batch: working via CLI
+- File writers: CSV, Excel, JSON, Parquet, Feather, HTML, SQLite: working
+- Strategies: 16 strategies available as listed: working
+- REST API server and endpoints: not present
+- Docker API deployment: not applicable (CLI-focused)
 
 ## 🧠 Key Concepts
 
@@ -706,12 +553,10 @@ We welcome contributions! Please see our contributing guidelines and feel free t
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the Apache-2.0 License - see the LICENSE file for details.
 
 ## 🔗 Links
 
 - **Documentation**: [dev-docs/](dev-docs/)
-- **API Reference**: http://localhost:8000/api/docs (when server is running)
 - **Examples**: [examples/](examples/)
-- **Architecture**: [dev-docs/architecture.mmd](dev-docs/architecture.mmd)
-- **API Endpoints**: [dev-docs/api-endpoints.mmd](dev-docs/api-endpoints.mmd)
+- **Architecture**: [dev-docs/architecture-overview.mmd](dev-docs/architecture-overview.mmd)
